@@ -1,0 +1,38 @@
+.arithmeticsymbols{
+    position: absolute;
+    width: 100%;;
+}
+.functionalsymbols{
+    position: absolute;
+    width: 99%;
+    top: -100px;
+    left: -201%;
+}
+.functionalsymbols .secondary{
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    font-size: 3rem;
+    background-color: coral;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+.functionalsymbols .secondary:nth-child(2){
+    left: 100%;
+}
+.functionalsymbols .secondary:nth-child(3){
+    left: 203%;
+}
+.arithmeticsymbols .secondary{
+    width: 100%;
+    height: 100px;
+    font-size: 3rem;
+    background-color: coral;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+.arithmeticsymbols .secondary:nth-child(5){
+    width: 99%;
+    position: absolute;
+    right: 350px;
+}
