@@ -1,61 +1,50 @@
-import React, { Component } from 'react'
+import React, {Component, PureComponent} from 'react'
 import './Symbols.css'
-import './Stylingmodule.css'
 import Logic from "./Logic";
 
 class Symbols extends Component {
 
-    constructor(props) {
-        super(props)
-    
-        this.state = {
-             symbolClicked: '',
-             previoussymobolclicked: ''
-        }
+    symbolClicked = '';
+    previoussymobolclicked = '';
+
+    shouldComponentUpdate(){
+        return false
     }
-    
+
     clickhandler = (event) => {
         
         let {firstvalueoftextarea, secondvalueoftextarea, setfirstvalueoftextarea, setsecondvalueoftextarea} = this.props;
 
-        this.setState({
-            symbolClicked: event.target.innerHTML
-        },
-        () => {
+        this.symbolClicked = event.target.innerHTML;
 
-            if(this.state.symbolClicked == 'AC'){
-                setfirstvalueoftextarea('');
-                console.log(' AC ran');
+        if(this.symbolClicked == 'AC'){
+            setfirstvalueoftextarea('');
+        }
+        else if((this.symbolClicked == '÷') || (this.symbolClicked == 'x') || (this.symbolClicked == '+') || (this.symbolClicked == '-') || (this.symbolClicked == '%') ){
+            this.previoussymobolclicked = this.symbolClicked;
+            this.symbolClicked = '';
+            setsecondvalueoftextarea(firstvalueoftextarea);
+            setfirstvalueoftextarea('');
+        }
+        else if(this.symbolClicked == '+/-'){
+            if(firstvalueoftextarea[0] != '-'){
+                setfirstvalueoftextarea('-'+firstvalueoftextarea);
+            }else{
+                setfirstvalueoftextarea(firstvalueoftextarea.substring(1));
             }
-            else if((this.state.symbolClicked == '÷') || (this.state.symbolClicked == 'x') || (this.state.symbolClicked == '+') || (this.state.symbolClicked == '-') || (this.state.symbolClicked == '%') ){
-                this.setState({
-                    previoussymobolclicked: this.state.symbolClicked,
-                    symbolClicked: ''
-                },()=>{
-                    setsecondvalueoftextarea(firstvalueoftextarea);
-                    setfirstvalueoftextarea('');
-                })
+        }
+        else if(this.symbolClicked == '='){
+            if(firstvalueoftextarea == '' || secondvalueoftextarea == ''){
+            }else{
+                var Result = Logic(parseFloat(secondvalueoftextarea),parseFloat(firstvalueoftextarea),this.previoussymobolclicked);
+                setfirstvalueoftextarea(Result);
             }
-            else if(this.state.symbolClicked == '+/-'){
-                if(firstvalueoftextarea[0] != '-'){
-                    setfirstvalueoftextarea('-'+firstvalueoftextarea);
-                    console.log(firstvalueoftextarea);
-                }else{
-                    setfirstvalueoftextarea(firstvalueoftextarea.substring(1));
-                    console.log(firstvalueoftextarea);
-                }
-            }
-            else if(this.state.symbolClicked == '='){
-                if(firstvalueoftextarea == '' || secondvalueoftextarea == ''){
-                }else{
-                    var Result = Logic(parseFloat(secondvalueoftextarea),parseFloat(firstvalueoftextarea),this.state.previoussymobolclicked);
-                    setfirstvalueoftextarea(Result);
-                }
-            }
-        })
+        }
+
     }
 
     render() {
+
         return (
             <div>
                 <div className="arithmeticsymbols">

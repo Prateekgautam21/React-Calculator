@@ -6,11 +6,11 @@ import Symbols from "./Symbols";
 function App() {
 
   const [firstvalueoftextarea, setfirstvalueoftextarea] = React.useState('');
-  const [secondvalueoftextarea, setsecondvalueoftextarea] = React.useState('');
+  const [secondvalueoftextarea, setsecondvalueoftextarea] = React.useState('');    
 
   return (
-    console.log('Rendering of component'),
-    <div className="App">
+    
+    <div className="App"> 
 
             <h1>{firstvalueoftextarea}</h1>
             
